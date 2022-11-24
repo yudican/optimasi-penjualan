@@ -24,10 +24,11 @@ class DataProdukTable extends LivewireDatatable
     {
         $this->hide = HideableColumn::where(['table_name' => $this->table_name, 'user_id' => auth()->user()->id])->pluck('column_name')->toArray();
         return [
+            Column::name('id')->label('No.'),
             Column::name('nama_produk')->label('Nama Produk')->searchable(),
-Column::name('harga_produk')->label('Harga Produk')->searchable(),
-Column::name('deskripsi_produk')->label('Deskripsi Produk')->searchable(),
-Column::name('garansi_produk')->label('Garansi Produk')->searchable(),
+            Column::name('harga_produk')->label('Harga Produk')->searchable(),
+            Column::name('deskripsi_produk')->label('Deskripsi Produk')->searchable(),
+            Column::name('garansi_produk')->label('Garansi Produk')->searchable(),
 
             Column::callback(['id'], function ($id) {
                 return view('livewire.components.action-button', [

@@ -25,6 +25,7 @@ class MenuTable extends LivewireDatatable
     {
         $this->hide = HideableColumn::where(['table_name' => $this->table_name, 'user_id' => auth()->user()->id])->pluck('column_name')->toArray();
         return [
+            Column::name('id')->label('No.'),
             Column::name('menu_label')->label('Menu Name')->searchable(),
             Column::name('menu_route')->label('Menu Route')->searchable(),
             Column::callback(['menu_icon'], function ($menu_icon) {

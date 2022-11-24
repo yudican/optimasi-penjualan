@@ -24,6 +24,7 @@ class PengaturanTable extends LivewireDatatable
     {
         $this->hide = HideableColumn::where(['table_name' => $this->table_name, 'user_id' => auth()->user()->id])->pluck('column_name')->toArray();
         return [
+            Column::name('id')->label('No.'),
             Column::name('code')->label('Code'),
             Column::name('value')->label('Value'),
 
