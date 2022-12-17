@@ -11,10 +11,11 @@ class DataProduk extends Model
     //use Uuid;
     use HasFactory;
     protected $table = 'data_produk';
+    public $incrementing = false;
 
     //public $incrementing = false;
 
-    protected $fillable = ['nama_produk', 'harga_produk', 'deskripsi_produk', 'garansi_produk'];
+    protected $fillable = ['id','nama_produk', 'harga_produk', 'deskripsi_produk', 'garansi_produk'];
 
     /**
      * Get all of the transaksiDetail for the DataProduk

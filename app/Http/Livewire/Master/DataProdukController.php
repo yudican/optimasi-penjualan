@@ -4,16 +4,20 @@ namespace App\Http\Livewire\Master;
 
 use App\Models\DataProduk;
 use Livewire\Component;
-
+use App\Imports\DataProductImport;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataProdukController extends Component
 {
-
+    use WithFileUploads;
     public $tbl_data_produk_id;
     public $nama_produk;
     public $harga_produk;
     public $deskripsi_produk;
     public $garansi_produk;
+    public $file;
+    public $file_path;
 
 
 
@@ -43,6 +47,7 @@ class DataProdukController extends Component
         $this->_validate();
 
         $data = [
+            'id' => strtotime(date('Y-m-d H:i:s')),
             'nama_produk'  => $this->nama_produk,
             'harga_produk'  => $this->harga_produk,
             'deskripsi_produk'  => $this->deskripsi_produk,
@@ -133,15 +138,24 @@ class DataProdukController extends Component
         $this->emit('showModal');
     }
 
+    public function saveImport()
+    {
+        Excel::import(new DataProductImport, $this->file_path);
+        $this->_reset();
+    }
+
     public function _reset()
     {
         $this->emit('closeModal');
         $this->emit('refreshTable');
+        $this->emit('showModalImport','hide');
         $this->tbl_data_produk_id = null;
         $this->nama_produk = null;
         $this->harga_produk = null;
         $this->deskripsi_produk = null;
         $this->garansi_produk = null;
+        $this->file = null;
+        $this->file_path = null;
         $this->form = true;
         $this->form_active = false;
         $this->update_mode = false;

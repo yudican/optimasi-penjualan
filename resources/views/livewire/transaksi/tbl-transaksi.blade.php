@@ -13,6 +13,7 @@
                             @else
                             @if (auth()->user()->hasTeamPermission($curteam, $route_name.':create'))
                             <button class="btn btn-primary btn-sm" wire:click="{{$modal ? 'showModal' : 'toggleForm(true)'}}"><i class="fas fa-plus"></i> Add New</button>
+                             <button class="btn btn-success btn-sm" wire:click="$emit('showModalImport','show')"><i class="fas fa-cloud-download-alt"></i>Import</button>
                             @endif
                             @endif
                         </div>
@@ -48,6 +49,24 @@
 
                         <button class="btn btn-danger btn-sm" wire:click='_reset'><i class="fa fa-times pr-2"></i>Batal</a>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- import --}}
+        <div id="import-modal" wire:ignore.self class="modal fade" tabindex="-1" permission="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+            <div class="modal-dialog" permission="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="my-modal-title">Import Data</h5>
+                    </div>
+                    <div class="modal-body">
+                        <x-input-file file="{{$file}}" path="{{optional($file_path)->getClientOriginalName()}}" name="file_path" label="Input File" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" wire:click='saveImport' class="btn btn-success btn-sm"><i class="fa fa-check pr-2"></i>Simpan</button>
+                        <button class="btn btn-danger btn-sm" wire:click='_reset'><i class="fa fa-times pr-2"></i>Batal</a>
                     </div>
                 </div>
             </div>
@@ -102,6 +121,10 @@
             window.livewire.on('closeModal', (data) => {
                 $('#confirm-modal').modal('hide')
                 $('#form-modal').modal('hide')
+            });
+
+            window.livewire.on('showModalImport', (data) => {
+                $('#import-modal').modal(data)
             });
         })
     </script>

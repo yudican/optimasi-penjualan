@@ -7,17 +7,20 @@ use App\Models\Transaksi;
 use App\Models\TransaksiDetail;
 use Carbon\Carbon;
 use Livewire\Component;
-
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DataTransaksiImport;
 
 class TransaksiController extends Component
 {
-
+    use WithFileUploads;
     public $tbl_transaksi_id;
     public $kode_transaksi;
     public $tanggal_transaksi;
     public $data_produk_id = [];
 
-
+    public $file;
+    public $file_path;
 
     public $route_name = null;
 
@@ -160,13 +163,22 @@ class TransaksiController extends Component
         $this->tanggal_transaksi = date('Y-m-d');
     }
 
+    public function saveImport()
+    {
+        Excel::import(new DataTransaksiImport, $this->file_path);
+        $this->_reset();
+    }
+
     public function _reset()
     {
         $this->emit('closeModal');
         $this->emit('refreshTable');
+        $this->emit('showModalImport','hide');
         $this->tbl_transaksi_id = null;
         $this->kode_transaksi = null;
         $this->tanggal_transaksi = null;
+        $this->file = null;
+        $this->file_path = null;
         $this->form = false;
         $this->form_active = false;
         $this->update_mode = false;

@@ -12,10 +12,10 @@ class Transaksi extends Model
     use HasFactory;
     protected $table = 'transaksi';
     //public $incrementing = false;
+    public $incrementing = false;
+    protected $fillable = ['id','kode_transaksi', 'tanggal_transaksi'];
 
-    protected $fillable = ['kode_transaksi', 'tanggal_transaksi'];
-
-    protected $dates = ['tanggal_transaksi'];
+    protected $dates = [];
 
     /**
      * Get all of the transaksiDetail for the Transaksi
