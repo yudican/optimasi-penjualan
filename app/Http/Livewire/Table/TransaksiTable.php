@@ -11,7 +11,7 @@ use App\Models\TransaksiDetail;
 
 class TransaksiTable extends LivewireDatatable
 {
-    protected $listeners = ['refreshTable'];
+    protected $listeners = ['refreshTable', 'hapusDataMultiple'];
     public $hideable = 'select';
     public $table_name = 'tbl_transaksi';
     public $hide = [];
@@ -25,6 +25,7 @@ class TransaksiTable extends LivewireDatatable
     {
         $this->hide = HideableColumn::where(['table_name' => $this->table_name, 'user_id' => auth()->user()->id])->pluck('column_name')->toArray();
         return [
+            Column::checkbox(),
             Column::name('id')->label('No.'),
             Column::name('kode_transaksi')->label('Kode Transaksi')->searchable(),
             Column::name('tanggal_transaksi')->label('Tanggal Transaksi')->searchable(),
@@ -45,6 +46,16 @@ class TransaksiTable extends LivewireDatatable
     public function getDataById($id)
     {
         $this->emit('getDataTransaksiById', $id);
+    }
+
+    public function hapusDataMultiple()
+    {
+        if (count($this->selected) > 0) {
+            Transaksi::whereIn('id', $this->selected)->delete();
+            $this->emit('refreshTable');
+            return $this->emit('showAlert', ['msg' => 'Data Berhasil Dihapus']);
+        }
+        return $this->emit('showAlertError', ['msg' => 'Pilih Data Terlebih Dahulu']);
     }
 
     public function getId($id)

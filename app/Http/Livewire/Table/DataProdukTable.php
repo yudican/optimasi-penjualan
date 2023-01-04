@@ -4,13 +4,12 @@ namespace App\Http\Livewire\Table;
 
 use App\Models\HideableColumn;
 use App\Models\DataProduk;
-use Mediconesystems\LivewireDatatables\BooleanColumn;
 use Mediconesystems\LivewireDatatables\Column;
 use App\Http\Livewire\Table\LivewireDatatable;
 
 class DataProdukTable extends LivewireDatatable
 {
-    protected $listeners = ['refreshTable'];
+    protected $listeners = ['refreshTable', 'hapusDataProdukMultiple'];
     public $hideable = 'select';
     public $table_name = 'tbl_data_produk';
     public $hide = [];
@@ -24,6 +23,7 @@ class DataProdukTable extends LivewireDatatable
     {
         $this->hide = HideableColumn::where(['table_name' => $this->table_name, 'user_id' => auth()->user()->id])->pluck('column_name')->toArray();
         return [
+            Column::checkbox(),
             Column::name('id')->label('No.'),
             Column::name('nama_produk')->label('Nama Produk')->searchable(),
             Column::name('harga_produk')->label('Harga Produk')->searchable(),
@@ -42,6 +42,16 @@ class DataProdukTable extends LivewireDatatable
     public function getDataById($id)
     {
         $this->emit('getDataDataProdukById', $id);
+    }
+
+    public function hapusDataProdukMultiple()
+    {
+        if (count($this->selected) > 0) {
+            DataProduk::whereIn('id', $this->selected)->delete();
+            $this->emit('refreshTable');
+            return $this->emit('showAlert', ['msg' => 'Data Berhasil Dihapus']);
+        }
+        return $this->emit('showAlertError', ['msg' => 'Pilih Data Terlebih Dahulu']);
     }
 
     public function getId($id)
