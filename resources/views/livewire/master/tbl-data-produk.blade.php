@@ -46,7 +46,6 @@
             @else
             <livewire:table.data-produk-table params="{{$route_name}}" />
             @endif
-
         </div>
 
         {{-- import --}}
