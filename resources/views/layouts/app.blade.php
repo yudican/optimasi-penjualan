@@ -93,8 +93,7 @@
                         <li class="nav-item dropdown hidden-caret">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <a class="nav-link" id="notifDropdown" title="Logout" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                                        this.closest('form').submit();">
+                                <a class="nav-link" id="notifDropdown" title="Logout" href="{{ route('logout') }}" onclick="event.preventDefault(); confirm('Yakin Akan Keluar?') ? this.closest('form').submit() : console.log('ok');">
                                     <i class="fas fa-power-off"></i>
                                 </a>
                             </form>

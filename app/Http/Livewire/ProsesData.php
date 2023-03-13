@@ -12,10 +12,26 @@ class ProsesData extends Component
 {
     public $data_items = [];
     public $data_item_rules = [];
-    public function mount()
+    public $proses_type = 'semua';
+
+
+    public function render()
     {
         $data_transaksi = [];
-        $transaksis = Transaksi::all();
+        // filter per month
+        $this->data_items = [];
+        $this->data_item_rules = [];
+
+        $transaksiData = Transaksi::query();
+        if ($this->proses_type == 'bulan') {
+            $transaksiData->whereMonth('tanggal_transaksi', date('m'));
+        }
+        if ($this->proses_type == 'tahun') {
+            $transaksiData->whereYear('tanggal_transaksi', date('Y'));
+        }
+
+        $transaksis = $transaksiData->get();
+
         foreach ($transaksis as $transaksi) {
             $data_transaksi[] = $transaksi->transaksiDetail()->get()->pluck('dataProduk.nama_produk')->toArray();
         }
@@ -42,14 +58,6 @@ class ProsesData extends Component
         }
         $this->data_items = $aprioris;
         $this->data_item_rules = $this->unique_multidim_array($associator->getRules(), 'confidence');
-        // // dd($associator->predict(['Apel']));
-        // dd($associator->getRules());
-        // dd($associator->apriori());
-        // dd($data_transaksi);
-
-    }
-    public function render()
-    {
         return view('livewire.proses-data');
     }
 

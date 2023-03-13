@@ -12,6 +12,23 @@
             </div>
         </div>
         <div class="col-md-12">
+            <x-select name="proses_type" label="Priode">
+                <option value="semua">semua</option>
+                <option value="bulan">bulan</option>
+                <option value="tahun">tahun</option>
+            </x-select>
+        </div>
+        <div class="col-md-12">
+            <div class="card" wire:loading wire:target="proses_type">
+                <div class="card-body">
+                    {{-- loading --}}
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span>Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @foreach ($data_items as $items)
             <div class="card">
                 <div class="card-header">
