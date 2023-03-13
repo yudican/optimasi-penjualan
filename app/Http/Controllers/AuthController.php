@@ -18,6 +18,7 @@ class AuthController extends Controller
         $validate = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
+            'g-recaptcha-response' => 'recaptcha',
         ]);
 
         if ($validate->fails()) {

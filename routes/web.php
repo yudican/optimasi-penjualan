@@ -8,6 +8,7 @@ use App\Http\Livewire\ProsesData;
 use App\Http\Livewire\Setting\PengaturanController;
 use App\Http\Livewire\Settings\Menu;
 use App\Http\Livewire\Transaksi\TransaksiController;
+use App\Http\Livewire\UpdateProfile;
 use App\Http\Livewire\UserManagement\Permission;
 use App\Http\Livewire\UserManagement\PermissionRole;
 use App\Http\Livewire\UserManagement\Role;
@@ -50,4 +51,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'user.authorization']
     Route::get('/pengaturan', PengaturanController::class)->name('pengaturan');
     Route::get('/data-transaksi', TransaksiController::class)->name('data-transaksi');
     Route::get('/proses-data', ProsesData::class)->name('proses-data');
+
+    Route::get('/update-profile', UpdateProfile::class)->name('update-profile');
 });

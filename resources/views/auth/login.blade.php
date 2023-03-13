@@ -11,22 +11,25 @@
             @csrf
             <div class="login-form">
                 <div class="form-group">
-                    <label for="email" class="placeholder"><b>Email</b></label>
+                    <label for="email" class="placeholder"><b>Emails</b></label>
                     <input id="email" type="text" class="form-control" name="email" :value="old('email')" required>
                 </div>
                 <div class="form-group">
                     <label for="password" class="placeholder"><b>Password</b></label>
-                    {{-- @if (Route::has('password.request'))
+                    @if (Route::has('password.request'))
                     <a class="link float-right" href="{{ route('password.request') }}">
                         {{ __('Lupa kata sandi?') }}
                     </a>
-                    @endif --}}
+                    @endif
                     <div class="position-relative">
                         <input id="password" name="password" type="password" class="form-control" required>
-                        {{-- <div class="show-password">
+                        <div class="show-password">
                             <i class="icon-eye"></i>
-                        </div> --}}
+                        </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    {!! htmlFormSnippet() !!}
                 </div>
                 <div class="form-group form-action-d-flex mb-3">
                     <div class="custom-control custom-checkbox">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+{!! ReCaptcha::htmlScriptTagJsApi() !!}
 
 <head>
     <meta charset="utf-8">
