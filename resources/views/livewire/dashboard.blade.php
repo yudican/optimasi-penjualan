@@ -9,6 +9,9 @@
                     {{-- <div id="chart" style="height: 300px;"></div> --}}
                     <canvas id="mhs-chart" style="height: 500px;"></canvas>
                 </div>
+                <div class="card-footer">
+                    <span>Grafik Data Transaksi</span>
+                </div>
             </div>
         </div>
     </div>
