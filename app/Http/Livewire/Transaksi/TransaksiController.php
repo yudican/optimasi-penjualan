@@ -49,6 +49,7 @@ class TransaksiController extends Component
         $this->_validate();
 
         $data = [
+            'id' => time(),
             'kode_transaksi'  => $this->kode_transaksi,
             'tanggal_transaksi'  => $this->tanggal_transaksi
         ];
@@ -173,7 +174,7 @@ class TransaksiController extends Component
     {
         $this->emit('closeModal');
         $this->emit('refreshTable');
-        $this->emit('showModalImport','hide');
+        $this->emit('showModalImport', 'hide');
         $this->tbl_transaksi_id = null;
         $this->kode_transaksi = null;
         $this->tanggal_transaksi = null;
