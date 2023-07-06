@@ -26,7 +26,7 @@
 			data: {
 				labels: dataChartBar.labels,
 				datasets : [{
-					label: "Transaksi",
+					label: "Transaksi 2021",
 					backgroundColor: 'rgb(23, 125, 255)',
 					borderColor: 'rgb(23, 125, 255)',
 					data: dataChartBar.values,
