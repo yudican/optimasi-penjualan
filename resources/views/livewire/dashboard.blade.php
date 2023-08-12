@@ -8,6 +8,7 @@
                 <div class="card-body">
                     {{-- <div id="chart" style="height: 300px;"></div> --}}
                     <canvas id="mhs-chart" style="height: 500px;"></canvas>
+                    <div id="custom-tooltip" style="position: absolute; z-index: 100; background-color: rgba(0, 0, 0, 0.7); color: white; padding: 5px; border-radius: 5px;"></div>
                 </div>
                 <div class="card-footer">
                     <span>Grafik Data Transaksi</span>
