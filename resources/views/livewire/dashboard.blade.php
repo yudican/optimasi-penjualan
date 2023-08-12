@@ -62,13 +62,11 @@
                     }
                 },
                 plugins: {
-                            legend: {
-                                display: true,
-                                labels: {
-                                    filter: function(legendItem, chartData) {
-                                        var index = chartData.labels.indexOf(legendItem.text);
-                                        var shortLabel = generateAlphabetArray(dataChartBar.labels.length).filter((row,index) => index < dataChartBar.labels.length)[index]; // Short label
-                                        return shortLabel;
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        var label = dataChartBar.labels[context.dataIndex]; // Custom label
+                                        return label;
                                     }
                                 }
                             }
