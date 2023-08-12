@@ -27,7 +27,7 @@
             data: {
                 labels: generateAlphabetArray(dataChartBar.labels.length), // Label inisial
                 datasets: [{
-                    label: 'Total Transaksi', // Label penuh
+                    label: 'Transaksi 2021', // Label penuh
                     data: dataChartBar.values,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.6)',
@@ -53,6 +53,7 @@
                         if (elements.length) {
                             var index = elements[0].index;
                             var label = dataChartBar.labels[index]; // Label penuh
+                            console.log(label, elements)
                             elements[0]._model.label = label;
                         }
                     }
