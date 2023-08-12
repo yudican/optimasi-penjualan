@@ -23,36 +23,68 @@
             console.log(dataChartBar,'dataChartBar')
             var barChart = document.getElementById('mhs-chart').getContext('2d')
             var myBarChart = new Chart(barChart, {
-			type: 'bar',
-			data: {
-				labels: dataChartBar.labels,
-				datasets : [{
-					label: "Transaksi 2021",
-					backgroundColor: 'rgb(23, 125, 255)',
-					borderColor: 'rgb(23, 125, 255)',
-					data: dataChartBar.values,
-				}],
-			},
-			options: {
-				responsive: true, 
-				maintainAspectRatio: false,
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero:true
-						}
-					}]
-				},
-               
-                
-
-
-			}
+                type: 'bar',
+            data: {
+                labels: generateAlphabetArray(dataChartBar.labels.length), // Label inisial
+                datasets: [{
+                    label: 'Total Transaksi', // Label penuh
+                    data: dataChartBar.values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(75, 192, 192, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                hover: {
+                    onHover: function(e, elements) {
+                        if (elements.length) {
+                            var index = elements[0].index;
+                            var label = dataChartBar.labels[index]; // Label penuh
+                            elements[0]._model.label = label;
+                        }
+                    }
+                },
+            }
 		});
         }
 
         const chartData = @json($chartData);
         loadChartBar(chartData);
+
+        function generateAlphabetArray(count) {
+            const alphabetArray = [];
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let counter = 0;
+            
+            for (let i = 0; i < count; i++) {
+                const letter = alphabet[i] + (counter > 1 ? counter : '');
+                alphabetArray.push(letter);
+                
+                if (i === count - 1) {
+                    i = -1; // Reset to loop back to 'A'
+                    counter++;
+                }
+                
+                if (counter > 1 && i === 0) {
+                    break;
+                }
+            }
+            
+            return alphabetArray;
+        }
     </script>
     @endpush
 </div>
