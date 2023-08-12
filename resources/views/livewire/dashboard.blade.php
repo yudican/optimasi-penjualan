@@ -20,6 +20,7 @@
     <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
     <script>
         function loadChartBar(dataChartBar) {
+            console.log(dataChartBar,'dataChartBar')
             var barChart = document.getElementById('mhs-chart').getContext('2d')
             var myBarChart = new Chart(barChart, {
 			type: 'bar',
