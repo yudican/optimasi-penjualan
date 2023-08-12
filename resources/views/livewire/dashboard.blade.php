@@ -51,9 +51,9 @@
                 hover: {
                     onHover: function(e, elements) {
                         if (elements.length) {
-                            var index = elements[0].index;
+                            var index = elements[0]._index;
                             var label = dataChartBar.labels[index]; // Label penuh
-                            console.log(label, elements)
+                            console.log(dataChartBar,index,label, elements)
                             elements[0]._model.label = label;
                         }
                     }
