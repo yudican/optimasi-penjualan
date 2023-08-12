@@ -51,26 +51,27 @@
                 },
                 hover: {
                     onHover: function(e, elements) {
-                        console.log('elements',elements)
                         if (elements.length) {
                             var index = elements[0]._index;
                             var label = dataChartBar.labels[index]; // Label penuh
                             elements[0]._model.label = label;
                             document.getElementById('custom-tooltip').textContent = label;
+                        }else{
+                            document.getElementById('custom-tooltip').textContent = '';
                         }
                     }
                 },
                 plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        var label = dataChartBar.labels[context.dataIndex]; // Custom label
-                                        console.log(context,label)
-                                        return label;
-                                    }
-                                }
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = dataChartBar.labels[context.dataIndex]; // Custom label
+                                console.log(context,label)
+                                return label;
                             }
-                        },
+                        }
+                    }
+                },
             }
 		});
         }
