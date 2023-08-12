@@ -25,7 +25,7 @@
             var myBarChart = new Chart(barChart, {
                 type: 'bar',
             data: {
-                labels: generateAlphabetArray(dataChartBar.labels.length), // Label inisial
+                labels: generateAlphabetArray(dataChartBar.labels.length).filter((row,index) => index <= dataChartBar.labels.length), // Label inisial
                 datasets: [{
                     label: 'Transaksi 2021', // Label penuh
                     data: dataChartBar.values,
@@ -50,6 +50,7 @@
                 },
                 hover: {
                     onHover: function(e, elements) {
+                        console.log('elements',elements)
                         if (elements.length) {
                             var index = elements[0]._index;
                             var label = dataChartBar.labels[index]; // Label penuh
@@ -58,6 +59,18 @@
                         }
                     }
                 },
+                plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    filter: function(legendItem, chartData) {
+                                        var index = chartData.labels.indexOf(legendItem.text);
+                                        var shortLabel = generateAlphabetArray(dataChartBar.labels.length).filter((row,index) => index <= dataChartBar.labels.length)[index]; // Short label
+                                        return shortLabel;
+                                    }
+                                }
+                            }
+                        },
             }
 		});
         }
