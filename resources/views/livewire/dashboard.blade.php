@@ -16,7 +16,7 @@
                     <div>
                         <span>Keterangan</span>
                         @foreach ($chartData['labels'] as $key => $item)
-                        <p>{{isset($abjads[$key]) ? $abjads[$key] : $item}} = {{$chartData['values'][$key]}}</p>
+                        <p>{{isset($abjads[$key]) ? $abjads[$key] : $item}} = {{$item}}</p>
                         @endforeach
                     </div>
                 </div>
