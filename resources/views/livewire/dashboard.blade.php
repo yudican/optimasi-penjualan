@@ -12,6 +12,13 @@
                 </div>
                 <div class="card-footer">
                     <span>Grafik Data Transaksi</span>
+
+                    <div>
+                        <span>Keterangan</span>
+                        @foreach ($chartData['labels'] as $key => $item)
+                        <p>{{isset($abjads[$key]) ? $abjads[$key] : $item}} = {{$chartData['values'][$key]}}</p>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
